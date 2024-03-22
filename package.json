@@ -7,6 +7,6 @@
   "author": "Juan Martin Muda",
   "license": "MIT",
   "scripts": {
-    "postversion": "npx @tinybox/changelog && git add CHANGELOG.md && git commit -m 'Bumped version' && git push --follow-tags"
+    "postversion": "npx @tinybox/changelog && git add CHANGELOG.md && git commit -m \"Bumped version\" && git push --follow-tags"
   }
 }
