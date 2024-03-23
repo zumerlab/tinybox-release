@@ -1,11 +1,41 @@
-# Changelog
+### Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. 
 
-## [1.0.1] - 2024-03-22
+#### [v1.0.3](https://github.com/zumerlab/tinybox-release/compare/v1.0.3...v1.0.3)
 
-### 🐛 Bug Fixes
+#### [v1.0.3](https://github.com/zumerlab/tinybox-release/compare/v1.0.2...v1.0.3)
 
-- Script postversion
+> 23 March 2024
 
+- chore add script [`f57d9ed`](https://github.com/zumerlab/tinybox-release/commit/f57d9ed3419c1d4c1669c7bebd255e9744c881e2)
+- fix process exit [`9dcd83b`](https://github.com/zumerlab/tinybox-release/commit/9dcd83b01ae3b21920a5770995c4fd39c3799980)
+- chore add script [`cfe101a`](https://github.com/zumerlab/tinybox-release/commit/cfe101a191a6a160f73d63765812aba312965049)
 
+#### [v1.0.2](https://github.com/zumerlab/tinybox-release/compare/v1.0.1...v1.0.2)
+
+> 22 March 2024
+
+- Bumped version [`3fa55f5`](https://github.com/zumerlab/tinybox-release/commit/3fa55f55f68c12d111733aec29ac4cf0cfd94983)
+- fix process continue if git dir is not clean [`22afa57`](https://github.com/zumerlab/tinybox-release/commit/22afa57d47b88becde6be786223903a7da228dae)
+
+#### [v1.0.1](https://github.com/zumerlab/tinybox-release/compare/v1.0.0...v1.0.1)
+
+> 22 March 2024
+
+- fix: script postversion [`e2cc9cb`](https://github.com/zumerlab/tinybox-release/commit/e2cc9cb0a2147bd30c969f6ef0befb002df739de)
+
+### [v1.0.0](https://github.com/zumerlab/tinybox-release/compare/v0.1.0...v1.0.0)
+
+> 22 March 2024
+
+- fix script [`9a727c4`](https://github.com/zumerlab/tinybox-release/commit/9a727c4db20d7ea491e231e53b98a7d6c063669f)
+
+#### v0.1.0
+
+> 21 March 2024
+
+- Add function to check if git working dir is clean [`aae577b`](https://github.com/zumerlab/tinybox-release/commit/aae577b76d0f42236a30003804c35de096999ced)
+- update [`3c501ed`](https://github.com/zumerlab/tinybox-release/commit/3c501edda2268847fe692a10541a9c7ff8817f8e)
+- first commit [`01ea92a`](https://github.com/zumerlab/tinybox-release/commit/01ea92a168df3ba57a4bba1860a05949aa70fb6c)
+- first commit [`3ed02da`](https://github.com/zumerlab/tinybox-release/commit/3ed02dac6ed2ac6ffe0e46b5f2689b13570005ca)
