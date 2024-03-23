@@ -178,7 +178,7 @@ isGitClean((isClean) => {
     console.error(
       'El repositorio de Git tiene cambios pendientes. Por favor, confirma o descarta los cambios antes de continuar. Use: git status'
     )
-    return
+    process.exit(1);
 
   }
 })
