@@ -7,7 +7,7 @@
   "author": "Juan Martin Muda",
   "license": "MIT",
   "scripts": {
-    "version": "node bin/index.js",
+    "release": "node bin/index.js",
     "postversion": "npx @tinybox/changelog && git add CHANGELOG.md && git commit -m \"Bumped version\" && git push --follow-tags"
   }
 }
