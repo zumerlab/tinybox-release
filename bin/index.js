@@ -124,7 +124,7 @@ isGitClean((isClean) => {
       }
 
       console.log(
-        chalk.green(`Suggested version: ${currentVersion} -> ${suggestedVersion}`)
+        chalk.green(`Current version ${currentVersion} -> suggested ${ chalk.bold(suggestedVersion)}`)
       )
 
       // Ask the user if they want to use the suggested version or specify an option
