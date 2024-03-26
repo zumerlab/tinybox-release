@@ -1,6 +1,6 @@
 # @zumerbox/release
 
-A tool for managing project releases.
+A tool for managing project version releases.
 
 ## Installation
 
