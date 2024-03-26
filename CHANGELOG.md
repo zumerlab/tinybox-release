@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. 
 
+#### [v1.0.5](https://github.com/zumerlab/zumerbox-release/compare/v1.0.4...v1.0.5)
+
+> 26 March 2024
+
+- Refactor release [`f6bbe87`](https://github.com/zumerlab/zumerbox-release/commit/f6bbe879e614a4168efde7e951192f3bee61427e)
+- Bumped version [`383ba85`](https://github.com/zumerlab/zumerbox-release/commit/383ba858ae21a4f14e90b8fd6f57439a830c2a8c)
+- Fix refactor release again [`464ccf3`](https://github.com/zumerlab/zumerbox-release/commit/464ccf36dd73b29e16fc73058f0f2cc45650c38b)
+- Fix refactor release [`99aaa3a`](https://github.com/zumerlab/zumerbox-release/commit/99aaa3ab242edec4e164652e9b57cbf00f7f0c28)
+- Fix refactor release again [`84f93be`](https://github.com/zumerlab/zumerbox-release/commit/84f93be5f99b4c03da9b25d04b651e0123b5f9d4)
+
 #### [v1.0.4](https://github.com/zumerlab/zumerbox-release/compare/v1.0.3...v1.0.4)
 
 > 25 March 2024
