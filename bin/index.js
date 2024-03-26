@@ -128,7 +128,7 @@ isGitClean((isClean) => {
       )
 
       // Ask the user if they want to use the suggested version or specify an option
-      const readline = require('readline').createInterface({
+      readline.createInterface({
         input: process.stdin,
         output: process.stdout,
       })
