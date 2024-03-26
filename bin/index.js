@@ -54,12 +54,12 @@ isGitClean((isClean) => {
     console.log(chalk.green('The Git repository is clean. You can proceed with the version bump.'))
     // Check for tags in the repository
     if (!hasTags()) {
-      readline.createInterface({
+      const read = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
       })
 
-      readline.question(
+      read.question(
         chalk.yellow(`There are no tags in the repository. Would you like to create a tag for the initial version based on the value of 'version' in package.json? (y/n) `),
         (answer) => {
           if (answer.trim().toLowerCase() === 'y') {
@@ -78,7 +78,7 @@ isGitClean((isClean) => {
           } else {
             console.log(chalk.yellow('A tag will not be created for the initial version.'))
           }
-          readline.close()
+          read.close()
         }
       )
     } else {
@@ -128,12 +128,12 @@ isGitClean((isClean) => {
       )
 
       // Ask the user if they want to use the suggested version or specify an option
-      readline.createInterface({
+      const read = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
       })
 
-      readline.question(
+      read.question(
         chalk.yellow(`Would you like to use the suggested version (${suggestedVersion}) or specify an option (major, minor, patch)? (default: ${suggestedVersion}) `),
         (answer) => {
           const option = answer.trim().toLowerCase() || suggestedVersion
@@ -159,7 +159,7 @@ isGitClean((isClean) => {
           }
 
           // Ask if this version will be release or prerelease
-          readline.question(
+          read.question(
             chalk.yellow(`Will this version be release or prerelease? (r/p) (default: r) `),
             (releaseType) => {
               const release = releaseType.trim().toLowerCase() || 'r'
@@ -167,7 +167,7 @@ isGitClean((isClean) => {
                 release === 'r' ? suggestedVersion : `${suggestedVersion}-pre.${Date.now()}`
               console.log(chalk.green(`The final version is: ${finalVersion}`))
               executeNpmVersion(finalVersion)
-              readline.close()
+              read.close()
             }
           )
         }
