@@ -2,6 +2,7 @@
 
 import { execSync, exec } from 'child_process';
 import { readFileSync } from 'fs';
+import readline from 'readline';
 import chalk from 'chalk';
 
 // Function to check if the Git repository is clean
@@ -53,7 +54,7 @@ isGitClean((isClean) => {
     console.log(chalk.green('The Git repository is clean. You can proceed with the version bump.'))
     // Check for tags in the repository
     if (!hasTags()) {
-      const readline = require('readline').createInterface({
+      readline.createInterface({
         input: process.stdin,
         output: process.stdout,
       })
