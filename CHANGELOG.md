@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. 
 
+#### [v1.0.6](https://github.com/zumerlab/zumerbox-release/compare/v1.0.5...v1.0.6)
+
+> 26 March 2024
+
+- Bumped version [`216aba3`](https://github.com/zumerlab/zumerbox-release/commit/216aba3ea12c54a9a22133e592de03b50a5c1d9b)
+- Style prompts [`e91a17b`](https://github.com/zumerlab/zumerbox-release/commit/e91a17b0efe445eb929cb3e90e919a96208bf095)
+
 #### [v1.0.5](https://github.com/zumerlab/zumerbox-release/compare/v1.0.4...v1.0.5)
 
 > 26 March 2024
