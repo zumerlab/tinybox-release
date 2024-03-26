@@ -1,42 +1,43 @@
 #!/usr/bin/env node
 
-const { execSync, exec } = require('child_process')
-const fs = require('fs')
+import { execSync, exec } from 'child_process';
+import { readFileSync } from 'fs';
+import chalk from 'chalk';
 
-// Función para verificar si el repositorio de Git está limpio
+// Function to check if the Git repository is clean
 function isGitClean(callback) {
   exec('git status --porcelain', (error, stdout, stderr) => {
     if (error) {
-      console.error(`Error al verificar el estado de Git: ${error.message}`)
+      console.error(chalk.red(`Error checking Git status: ${error.message}`))
       return
     }
     if (stderr) {
-      console.error(`Error al verificar el estado de Git: ${stderr}`)
+      console.error(chalk.red(`Error checking Git status: ${stderr}`))
       return
     }
-    // Si no hay cambios pendientes, el repositorio está limpio
+    // If there are no pending changes, the repository is clean
     const isClean = stdout.trim() === ''
     callback(isClean)
   })
 }
 
-// Función para ejecutar la versión sugerida
+// Function to execute the suggested version
 function executeNpmVersion(version, first) {
   let args = first ? '--allow-same-version' : ''
   execSync(`npm version ${version} ${args}`, (error, stdout, stderr) => {
     if (error) {
-      console.error(`Error al ejecutar npm version: ${error.message}`)
+      console.error(chalk.red(`Error executing npm version: ${error.message}`))
       return
     }
     if (stderr) {
-      console.error(`Error al ejecutar npm version: ${stderr}`)
+      console.error(chalk.red(`Error executing npm version: ${stderr}`))
       return
     }
-    console.log(stdout)
+    console.log(chalk.green(stdout))
   })
 }
 
-// Función para verificar si hay tags en git
+// Function to check for tags in git
 function hasTags() {
   try {
     const tags = execSync('git tag').toString().split('\n')
@@ -46,13 +47,11 @@ function hasTags() {
   }
 }
 
-// Ejecución principal
+// Main execution
 isGitClean((isClean) => {
   if (isClean) {
-    console.log(
-      'El repositorio de Git está limpio. Puedes proceder con el bump de versión.'
-    )
-    // Verificar si hay tags en el repositorio
+    console.log(chalk.green('The Git repository is clean. You can proceed with the version bump.'))
+    // Check for tags in the repository
     if (!hasTags()) {
       const readline = require('readline').createInterface({
         input: process.stdin,
@@ -60,50 +59,50 @@ isGitClean((isClean) => {
       })
 
       readline.question(
-        `No hay tags en el repositorio. ¿Desea crear un tag para la versión inicial basada en el valor de 'version' en package.json? (y/n) `,
+        chalk.yellow(`There are no tags in the repository. Would you like to create a tag for the initial version based on the value of 'version' in package.json? (y/n) `),
         (answer) => {
           if (answer.trim().toLowerCase() === 'y') {
             let initialVersion
             try {
               const packageJson = JSON.parse(
-                fs.readFileSync('./package.json', 'utf8')
+                readFileSync('./package.json', 'utf8')
               )
               initialVersion = packageJson.version
             } catch (err) {
-              console.error('No se pudo leer el archivo package.json')
+              console.error(chalk.red('Could not read the package.json file'))
               process.exit(1)
             }
             executeNpmVersion(initialVersion, true)
-            console.log(`Tag v${initialVersion} creado.`)
+            console.log(chalk.green(`Tag v${initialVersion} created.`))
           } else {
-            console.log('No se creará un tag para la versión inicial.')
+            console.log(chalk.yellow('A tag will not be created for the initial version.'))
           }
           readline.close()
         }
       )
     } else {
-      // Leer la versión actual desde el archivo package.json
+      // Read the current version from the package.json file
       let currentVersion
       try {
         const packageJson = JSON.parse(
-          fs.readFileSync('./package.json', 'utf8')
+          readFileSync('./package.json', 'utf8')
         )
         currentVersion = packageJson.version
       } catch (err) {
-        console.error('No se pudo leer el archivo package.json')
+        console.error(chalk.red('Could not read the package.json file'))
         process.exit(1)
       }
 
-      // Analizar los git commits para sugerir el tipo de versión ideal
+      // Parse git commits to suggest the ideal version type
       const commitLog = execSync('git log --oneline').toString()
-      let suggestedBump = 'patch' // Por defecto
+      let suggestedBump = 'patch' // Default
       if (commitLog.includes('BREAKING CHANGE')) {
         suggestedBump = 'major'
       } else if (commitLog.includes('feat')) {
         suggestedBump = 'minor'
       }
 
-      // Mostrar la versión sugerida
+      // Display the suggested version
       const currentVersionArray = currentVersion.split('.')
       let suggestedVersion
       switch (suggestedBump) {
@@ -124,19 +123,19 @@ isGitClean((isClean) => {
       }
 
       console.log(
-        `Sugerencia de versión: ${currentVersion} -> ${suggestedVersion}`
+        chalk.green(`Suggested version: ${currentVersion} -> ${suggestedVersion}`)
       )
 
-      // Preguntar al usuario si quiere utilizar la versión sugerida o especificar una opción
+      // Ask the user if they want to use the suggested version or specify an option
       const readline = require('readline').createInterface({
         input: process.stdin,
         output: process.stdout,
       })
 
       readline.question(
-        `¿Desea utilizar la versión sugerida (${suggestedVersion}) o especificar una opción (major, minor, patch)? `,
+        chalk.yellow(`Would you like to use the suggested version (${suggestedVersion}) or specify an option (major, minor, patch)? (default: ${suggestedVersion}) `),
         (answer) => {
-          const option = answer.trim().toLowerCase()
+          const option = answer.trim().toLowerCase() || suggestedVersion
           const validOptions = ['major', 'minor', 'patch']
           if (validOptions.includes(option)) {
             suggestedBump = option
@@ -158,15 +157,14 @@ isGitClean((isClean) => {
             }
           }
 
-          // Preguntar si esta versión será release o prerelease
+          // Ask if this version will be release or prerelease
           readline.question(
-            `¿Esta versión será release o prerelease? (r/p) `,
+            chalk.yellow(`Will this version be release or prerelease? (r/p) (default: r) `),
             (releaseType) => {
+              const release = releaseType.trim().toLowerCase() || 'r'
               const finalVersion =
-                releaseType.trim().toLowerCase() === 'r'
-                  ? suggestedVersion
-                  : `${suggestedVersion}-pre.${Date.now()}`
-              console.log(`La versión final es: ${finalVersion}`)
+                release === 'r' ? suggestedVersion : `${suggestedVersion}-pre.${Date.now()}`
+              console.log(chalk.green(`The final version is: ${finalVersion}`))
               executeNpmVersion(finalVersion)
               readline.close()
             }
@@ -176,11 +174,8 @@ isGitClean((isClean) => {
     }
   } else {
     console.error(
-      'El repositorio de Git tiene cambios pendientes. Por favor, confirma o descarta los cambios antes de continuar. Use: git status'
+      chalk.red('The Git repository has pending changes. Please commit or discard the changes before continuing. Use: git status')
     )
-    process.exit(1);
-
+    process.exit(1)
   }
 })
-
-// version: changelog && git add CHANGELOG.md && git push --follow-tags git commit -m "whatevs"

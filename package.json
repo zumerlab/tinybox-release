@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "",
   "main": "./bin/index.js",
+  "type": "module",
   "bin": {
     "release": "./bin/index.js"
   },
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/zumerlab/zumerbox-release/issues"
   },
-  "homepage": "https://github.com/zumerlab/zumerbox-release#readme"
+  "homepage": "https://github.com/zumerlab/zumerbox-release#readme",
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
 }
